@@ -1,42 +1,29 @@
-class ImmutablePerson {
-  constructor(name, id, dateOfJoining, addresses) {
-    this._name = name;
-    this._id = id;
-    this._dateOfJoining = new Date(dateOfJoining);
-    this._addresses = [...addresses]; // Create a shallow copy
-    Object.freeze(this);
-  }
+?/Design an immutable class with following attributes
 
-  get name() {
-    return this._name;
-  }
 
-  get id() {
-    return this._id;
-  }
-
-  get dateOfJoining() {
-    return new Date(this._dateOfJoining);
-  }
-
-  get addresses() {
-    return [...this._addresses]; // Return a new copy to prevent modification
-  }
+class Address {
+    constructor(street, city, zip) {
+        this.street = street;
+        this.city = city;
+        this.zip = zip;
+        Object.freeze(this); 
+    }
 }
 
-// Test the class
-const person = new ImmutablePerson(
-  "John Doe",
-  "123",
-  "2023-01-01",
-  [{ street: "123 Main St", city: "Anytown" }]
-);
+class ImmutablePerson {
+    constructor(name, id, dateOfJoining, addresses) {
+        this.name = name;
+        this.id = id;
+        this.dateOfJoining = new Date(dateOfJoining); 
+        this.addresses = addresses.map(addr => new Address(addr.street, addr.city, addr.zip)); 
+        Object.freeze(this); 
+    }
+}
 
-console.log(person.name);
-console.log(person.id);
-console.log(person.dateOfJoining);
-console.log(person.addresses);
 
-// Attempt to modify (will fail silently in non-strict mode)
-person.name = "Jane Doe";
-console.log(person.name); // Still "John Doe"
+let person = new ImmutablePerson("John Doe", "101", "2022-01-15", [
+    { street: "123 Main St", city: "New York", zip: "10001" },
+    { street: "456 Elm St", city: "Los Angeles", zip: "90001" }
+]);
+
+console.log(person);
