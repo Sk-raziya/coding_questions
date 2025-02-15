@@ -1,29 +1,25 @@
+//Given an array of Red Green Blue balls.You have to sort it.
+
 function sortRGB(arr) {
-  let low = 0;
-  let mid = 0;
-  let high = arr.length - 1;
+    let left = 0, right = arr.length - 1, mid = 0;
 
-  while (mid <= high) {
-    switch (arr[mid]) {
-      case 'B':
-        [arr[low], arr[mid]] = [arr[mid], arr[low]];
-        low++;
-        mid++;
-        break;
-      case 'G':
-        mid++;
-        break;
-      case 'R':
-        [arr[mid], arr[high]] = [arr[high], arr[mid]];
-        high--;
-        break;
+    while (mid <= right) {
+        if (arr[mid] === 'B') {
+            [arr[left], arr[mid]] = [arr[mid], arr[left]];
+            left++;
+            mid++;
+        } else if (arr[mid] === 'G') {
+            mid++;
+        } else { 
+            [arr[mid], arr[right]] = [arr[right], arr[mid]];
+            right--;
+        }
     }
-  }
-
-  return arr;
 }
 
-// Test the function
-const input = ['R', 'G', 'B', 'G', 'G', 'R', 'B', 'B', 'G'];
-const output = sortRGB(input);
-console.log(output);
+
+let balls = ['R', 'G', 'B', 'G', 'G', 'R', 'B', 'B', 'G'];
+console.log(balls);
+
+sortRGB(balls);
+console.log(balls);
