@@ -1,28 +1,25 @@
+//Given a sorted array of positive and negative numbers. You have to Square it and sort it.
+
 function squareAndSort(arr) {
-  const n = arr.length;
-  const result = new Array(n);
-  let left = 0;
-  let right = n - 1;
-  let index = n - 1;
+    let squaredArray = [];
 
-  while (left <= right) {
-    const leftSquare = arr[left] * arr[left]; 
-    const rightSquare = arr[right] * arr[right];
-
-    if (leftSquare > rightSquare) {
-      result[index] = leftSquare;
-      left++;
-    } else {
-      result[index] = rightSquare;
-      right--;
+    
+    for (let i = 0; i < arr.length; i++) {
+        squaredArray.push(arr[i] * arr[i]);
     }
-    index--;
-  }
 
-  return result;
+    
+    squaredArray.sort(function (a, b) {
+        return a - b; 
+    });
+
+    return squaredArray;
 }
 
-// Test the function
-const input = [-12, -8, -7, -5, 2, 4, 5, 11, 15];
-const output = squareAndSort(input);
-console.log(output);
+
+let arr = [-12, -8, -7, -5, 2, 4, 5, 11, 15];
+let result = squareAndSort(arr);
+console.log(result);
+
+
+
