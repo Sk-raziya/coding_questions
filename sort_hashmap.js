@@ -1,22 +1,19 @@
+
+//Sort hashmap by value.
+
+
 function sortHashMapByValue(map) {
-  // Convert the map to an array of [key, value] pairs
-  const entries = Object.entries(map);
-
-  // Sort the array based on the values
-  entries.sort((a, b) => a[1].localeCompare(b[1]));
-
-  // Create a new object from the sorted array
-  const sortedMap = Object.fromEntries(entries);
-
-  return sortedMap;
+    let sortedEntries = Object.entries(map).sort((a, b) => a[1].localeCompare(b[1]));
+    let sortedMap = Object.fromEntries(sortedEntries);
+    return sortedMap;
 }
 
-// Test the function
-const input = {
-  101: "John Doe",
-  102: "Jane Smith",
-  103: "Peter Johnson"
+let people = {
+    101: "John Doe",
+    102: "Jane Smith",
+    103: "Peter Johnson"
 };
 
-const output = sortHashMapByValue(input);
-console.log(output);
+console.log(people);
+let sortedPeople = sortHashMapByValue(people);
+console.log(sortedPeople);
